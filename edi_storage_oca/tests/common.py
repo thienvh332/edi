@@ -123,6 +123,12 @@ class TestEDIStorageBase(EDIBackendCommonComponentTestCase):
 
         return mock.patch(STORAGE_BACKEND_MOCK_PATH + "._find_files", _result)
 
+    def _mock_storage_backend_find_files(self, result):
+        def _result(self, pattern, relative_path=None, **kw):
+            return result
+
+        return mock.patch(STORAGE_BACKEND_MOCK_PATH + ".find_files", _result)
+
     def _test_result(
         self,
         record,
