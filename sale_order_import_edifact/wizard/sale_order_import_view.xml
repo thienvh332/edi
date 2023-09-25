@@ -12,10 +12,10 @@
             </footer>
             <footer position="inside">
                 <button
-                    name="parse_order_button"
+                    name="button_parse_order_preview"
                     type="object"
-                    states="import"
                     string="Parse"
+                    attrs="{'invisible': ['|', ('import_type','!=','edifact'), ('state','!=','import')]}"
                     groups="base.group_system,base.group_no_one"
                 />
             </footer>

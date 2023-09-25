@@ -40,10 +40,12 @@ class BusinessDocumentImport(models.AbstractModel):
             )
             raise exceptions.UserError(
                 _(
-                    "Partner GLN Code: %s not found in order file: '%s' "
-                    "from VAT registration number '%s'."
+                    "Partner GLN Code: %(party)s not found in order file: '%(file)s' "
+                    "from VAT registration number '%(vat)s'.",
+                    party=party_id,
+                    file=ctx.get("order_filename"),
+                    vat=ctx.get("rff_va"),
                 )
-                % (party_id, ctx.get("order_filename"), ctx.get("rff_va"))
             )
 
         return id_number.partner_id

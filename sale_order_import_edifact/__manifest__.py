@@ -4,7 +4,7 @@
 {
     "name": "Import Business Document EDIFACT/D96A Order",
     "summary": "EDIFACT/D96A Order",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "development_status": "Alpha",
     "category": "Sales Management",
     "website": "https://github.com/OCA/edi",
@@ -22,7 +22,7 @@
         "partner_identification",
         "partner_identification_gln",
         "base_edifact",
-        "edi_sale_order_import",
+        "sale_order_import",
     ],
     "data": [
         "wizard/sale_order_import_view.xml",
