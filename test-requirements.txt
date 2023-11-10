@@ -1,0 +1,1 @@
+odoo-addon-base_edifact @ git+https://github.com/OCA/edi.git@refs/pull/853/head#subdirectory=setup/base_edifact
