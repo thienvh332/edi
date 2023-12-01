@@ -43,8 +43,8 @@ class DespatchAdviceImport(models.TransientModel):
         supplier_xpath = xml_root.xpath(
             "/main:DespatchAdvice/cac:DespatchSupplierParty/cac:Party", namespaces=ns
         )
-        supplier_dict = self.ubl_parse_party(supplier_xpath[0], ns)
         # We only take the "official references" for supplier_dict
+        supplier_dict = self.ubl_parse_party(supplier_xpath[0], ns)
         supplier_dict = {"vat": supplier_dict.get("vat")}
         customer_xpath = xml_root.xpath(
             "/main:DespatchAdvice/cac:DeliveryCustomerParty/cac:Party", namespaces=ns
