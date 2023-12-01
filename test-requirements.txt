@@ -1,0 +1,2 @@
+odoo-addon-base_business_document_import @ git+https://github.com/OCA/edi.git@refs/pull/884/head#subdirectory=setup/base_business_document_import
+odoo-addon-despatch_advice_import @ git+https://github.com/OCA/edi.git@refs/pull/879/head#subdirectory=setup/despatch_advice_import
