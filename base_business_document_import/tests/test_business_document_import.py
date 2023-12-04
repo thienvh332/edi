@@ -96,7 +96,9 @@ class TestBaseBusinessDocumentImport(TransactionCase):
             "xmlid": "base.main_partner",
         }
         partner = bdio._direct_match(partner_dict, self.env["res.partner"], True)
-        self.assertEqual(partner.name, "YourCompany")
+        # by default base.main_partner's name is "YourCompany"
+        # but if stock module is installed, it is changed to "My Company (San Francisco)"
+        self.assertTrue(partner.name in ("YourCompany", "My Company (San Francisco)"))
 
     def test_match_partner_ref(self):
         partner1 = self.env["res.partner"].create(
