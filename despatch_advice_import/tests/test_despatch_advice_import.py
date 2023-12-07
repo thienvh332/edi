@@ -221,7 +221,7 @@ class TestDespatchAdviceImport(TransactionCase):
 
         self.DespatchAdviceImport.process_data(data)
         self.assertEqual(self.purchase_order.state, "purchase")
-        self.assertEqual(len(self.purchase_order.picking_ids), 3)
+        self.assertEqual(len(self.purchase_order.picking_ids), 2)
         # line1
         line1_move_ids = self.line1.move_ids
         self.assertEqual(len(line1_move_ids), 2)
@@ -314,7 +314,7 @@ class TestDespatchAdviceImport(TransactionCase):
         self.DespatchAdviceImport.process_data(data)
         self.assertEqual(len(self.purchase_order.picking_ids), 2)
         move_ids = self.line3.move_ids
-        self.assertEqual(len(move_ids), 3)
+        self.assertEqual(len(move_ids), 4)
         self.assertEqual(sum(move_ids.mapped("product_qty")), self.line3.product_qty)
         moves_confirmed = move_ids.filtered(
             lambda s: s.state == "done" and not s.picking_id.backorder_id

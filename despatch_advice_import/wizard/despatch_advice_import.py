@@ -15,7 +15,6 @@ logger = logging.getLogger(__name__)
 
 
 class DespatchAdviceImport(models.TransientModel):
-
     _name = "despatch.advice.import"
     _description = "Despatch Advice Import from Files"
 
@@ -193,6 +192,15 @@ class DespatchAdviceImport(models.TransientModel):
                 self._process_rejected(stock_moves, parsed_order_document)
             else:
                 self._process_conditional(stock_moves, parsed_order_document, line_info)
+        self._process_picking_done(lines[0].move_ids[0])
+
+    def _process_picking_done(self, move):
+        if all([line.quantity_done != 0 for line in move.picking_id.move_ids]):
+            move.picking_id.button_validate()
+        else:
+            # TODO: Auto create backorder
+            picking = move.picking_id
+            validation_result = picking.button_validate()
 
     def _process_rejected(self, stock_moves, parsed_order_document):
         parsed_order_document["chatter_msg"] = parsed_order_document.get(
@@ -213,6 +221,8 @@ class DespatchAdviceImport(models.TransientModel):
         )
         stock_moves._action_confirm()
         stock_moves._action_assign()
+        for move in stock_moves:
+            move.quantity_done = move.product_qty
 
     def _process_conditional(self, moves, parsed_order_document, line):
         precision = self.env["decimal.precision"].precision_get(
@@ -234,7 +244,6 @@ class DespatchAdviceImport(models.TransientModel):
         move_ids_to_backorder = []
         move_ids_to_cancel = []
         for move in moves:
-            self._check_picking_status(move.picking_id)
             if (
                 float_compare(qty, move.product_uom_qty, precision_digits=precision)
                 >= 0
@@ -250,9 +259,7 @@ class DespatchAdviceImport(models.TransientModel):
                 # qty planned < qty into the stock move: Split it
                 new_vals = move._split(move.product_uom_qty - qty)
                 move.quantity_done = move.product_qty
-                move._action_done()
                 move = self.env["stock.move"].create(new_vals[0])
-                move._action_confirm()
 
             qty -= move.product_uom_qty
             if not backorder_qty:
@@ -278,47 +285,13 @@ class DespatchAdviceImport(models.TransientModel):
             backorder_qty -= move.product_uom_qty
             move_ids_to_backorder.append(move.id)
 
-        # move backorder moves to a backorder
-        if move_ids_to_backorder:
-            moves_to_backorder = self.env["stock.move"].browse(move_ids_to_backorder)
-            self._add_moves_to_backorder(moves_to_backorder)
         # cancel moves to cancel
         if move_ids_to_cancel:
             moves_to_cancel = self.env["stock.move"].browse(move_ids_to_cancel)
             moves_to_cancel._action_cancel()
+        # move backorder moves to a backorder
+        if move_ids_to_backorder:
+            moves_to_backorder = self.env["stock.move"].browse(move_ids_to_backorder)
+            for move in moves_to_backorder:
+                move._action_confirm(merge=False)
 
-    def _add_moves_to_backorder(self, moves):
-        """Add the move the picking's backorder.
-
-        If no backorder exists, create a new one.
-
-        :return:
-        """
-        StockPicking = self.env["stock.picking"]
-        current_picking = moves[0].picking_id
-        backorder = StockPicking.search([("backorder_id", "=", current_picking.id)])
-        if not backorder:
-            date_done = current_picking.date_done
-            current_picking._create_backorder()
-            # preserve date_done....
-            current_picking.date_done = date_done
-        else:
-            moves.write({"picking_id": backorder.id})
-            backorder.action_confirm()
-            backorder.action_assign()
-
-    def _check_picking_status(self, picking):
-        """
-        The picking operations have already begun
-        :param picking:
-        :return:
-        """
-        if any(line.qty_done != 0 for line in picking.move_line_ids):
-            raise UserError(
-                _(
-                    "Some operations have already started! "
-                    "Please validate or reset operations on "
-                    "picking %s to process delivery slip to be computed."
-                )
-                % picking.name
-            )
