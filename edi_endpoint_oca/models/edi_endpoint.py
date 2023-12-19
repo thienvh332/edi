@@ -71,6 +71,19 @@ class EDIEndpoint(models.Model):
         self._check_endpoint_ready(request=True)
         return super()._handle_request(request)
 
+    def _selection_request_content_type(self):
+        original_options = super()._selection_request_content_type()
+        return original_options + [("multipart/form-data", "Files")]
+
+    def _validate_request(self, request):
+        try:
+            return super()._validate_request(request)
+        except werkzeug.exceptions.UnsupportedMediaType as e:
+            if self.request_content_type != "multipart/form-data":
+                raise e
+            else:
+                pass
+
     def action_view_edi_records(self):
         self.ensure_one()
         xmlid = "edi_oca.act_open_edi_exchange_record_view"
