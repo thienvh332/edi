@@ -106,7 +106,7 @@ grammar = OrderedDict(
             "dp": False,
             "ubl_path": False,
             "df_val": False,
-            "df_func": False,
+            "df_func": "get_Adrs_Name",
         },
         "RxAusk_Adrs_Name2": {
             "type": "str",
@@ -114,7 +114,7 @@ grammar = OrderedDict(
             "dp": False,
             "ubl_path": False,
             "df_val": False,
-            "df_func": False,
+            "df_func": "get_Adrs_Name2",
         },
         "RxAusk_Adrs_Name3": {
             "type": "str",
@@ -122,7 +122,7 @@ grammar = OrderedDict(
             "dp": False,
             "ubl_path": False,
             "df_val": False,
-            "df_func": False,
+            "df_func": "get_Adrs_Name3",
         },
         "RxAusk_Adrs_Name4": {
             "type": "str",
@@ -130,7 +130,7 @@ grammar = OrderedDict(
             "dp": False,
             "ubl_path": False,
             "df_val": False,
-            "df_func": False,
+            "df_func": "get_Adrs_Name4",
         },
         "RxAusk_Adrs_Anrede": {
             "type": "str",
@@ -146,7 +146,7 @@ grammar = OrderedDict(
             "dp": False,
             "ubl_path": False,
             "df_val": False,
-            "df_func": False,
+            "df_func": "get_Adrs_Adr",
         },
         "RxAusk_Adrs_Adr2": {
             "type": "str",
