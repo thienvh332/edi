@@ -217,6 +217,14 @@ def convert_unit_code(key, val):
     return val
 
 
+def get_address_name(*args):
+    start, end, reverse = args[0:3]
+    list_address = args[3:]
+    if reverse == 1:
+        return next(filter(None, list_address[start:end][::-1]), "")
+    return next(filter(None, list_address[start:end]), "")
+
+
 def generate_wamas_line(dict_item, grammar, **kwargs):  # noqa: C901
     res = ""
     dict_parent_id = kwargs.get("dict_parent_id", {})
@@ -275,6 +283,36 @@ def generate_wamas_line(dict_item, grammar, **kwargs):  # noqa: C901
                 args = (dict_wamas_out,)
                 args += ast.literal_eval(re.search(r"\((.*?)\)", df_func).group(0))
                 df_func = "get_date_from_field"
+            elif "get_address_name" in df_func:
+                start = int(df_func[-6])
+                end = int(df_func[-4])
+                reverse = int(df_func[-2])
+                args = (
+                    start,
+                    end,
+                    reverse,
+                    dict_item.get(
+                        "DespatchAdvice.cac:DeliveryCustomerParty."
+                        "cac:Party.cac:Contact.cbc:Name"
+                    ),
+                    dict_item.get(
+                        "DespatchAdvice.cac:DeliveryCustomerParty."
+                        "cac:Party.cac:PartyName.cbc:Name"
+                    ),
+                    dict_item.get(
+                        "DespatchAdvice.cac:DeliveryCustomerParty."
+                        "cac:Party.cac:PostalAddress.cbc:Department"
+                    ),
+                    dict_item.get(
+                        "DespatchAdvice.cac:DeliveryCustomerParty."
+                        "cac:Party.cac:PartyName.cbc:StreetName"
+                    ),
+                    dict_item.get(
+                        "DespatchAdvice.cac:DeliveryCustomerParty."
+                        "cac:Party.cac:PartyName.cbc:AdditionalStreetName"
+                    ),
+                )
+                df_func = "get_address_name"
 
             val = globals()[df_func](*args)
 
