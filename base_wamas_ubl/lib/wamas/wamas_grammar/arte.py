@@ -139,7 +139,7 @@ grammar = OrderedDict(
             "type": "str",
             "length": 5,
             "dp": False,
-            "dict_key": False,
+            "dict_key": "package_type",
             "df_val": False,
             "df_func": False,
         },

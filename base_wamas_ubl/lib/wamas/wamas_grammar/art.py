@@ -91,7 +91,7 @@ grammar = OrderedDict(
             "type": "str",
             "length": 5,
             "dp": False,
-            "dict_key": False,
+            "dict_key": "wamas_code",
             "df_val": False,
             "df_func": False,
         },
