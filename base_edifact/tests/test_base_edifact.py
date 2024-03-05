@@ -50,9 +50,14 @@ class TestBaseEdifact(TransactionCase):
         self.assertEqual(currency["symbol"], "€")
 
     def test_map2odoo_product(self):
-        seg = ("1", "", ["8885583503464", "EN"])
+        seg = ("1", "", ["9783898307529", "EN"])
         product = self.base_edifact_model.map2odoo_product(seg)
-        self.assertEqual(product["barcode"], "8885583503464")
+        self.assertEqual(product["barcode"], "9783898307529")
+
+    def test_map2odoo_product_incorrect_barcode(self):
+        seg = ("1", "", ["97838983075", "EN"])
+        product = self.base_edifact_model.map2odoo_product(seg)
+        self.assertEqual(product, {})
 
     def test_map2odoo_product_pia(self):
         seg = ("1", "", ["", "EN"])
