@@ -15,5 +15,5 @@ class EDIStorageReceiveComponent(Component):
 
     def receive(self):
         path = self._get_remote_file_path("pending")
-        filedata = self.storage.get(path.as_posix())
+        filedata = self.storage.get(path.as_posix(), binary=True)
         return filedata
