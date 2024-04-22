@@ -3,3 +3,4 @@
 * Duong (Tran Quoc) <duongtq@trobz.com>
 * Thien (Vo Hong) <thienvh@trobz.com>
 * Tris Doan <tridm@trobz.com>
+* Thien (Vo Hong) <thienvh@trobz.com>
