@@ -9,7 +9,11 @@
     "license": "LGPL-3",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/edi",
-    "depends": ["purchase", "edi_oca", "component_event"],
-    "data": ["views/purchase_order_views.xml", "views/edi_exchange_record_views.xml"],
+    "depends": ["purchase", "edi_oca", "component_event", "edi_configuration"],
+    "data": [
+        "views/purchase_order_views.xml",
+        "views/edi_exchange_record_views.xml",
+        "data/edi_configuration.xml",
+    ],
     "demo": [],
 }

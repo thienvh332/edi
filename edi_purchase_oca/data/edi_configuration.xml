@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="edi_conf_send_via_email" model="edi.configuration">
+        <field name="code">send_via_email_rfq</field>
+        <field
+            name="snippet_do"
+        >record._edi_send_via_email(ir_action=record.action_rfq_send())</field>
+    </record>
+</odoo>
