@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_partner_form_inherit" model="ir.ui.view">
         <field name="name">res.partner.form.inherit.sales_purchases</field>
@@ -7,8 +7,10 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='sales_purchases']" position="inside">
                 <group string="Edi Configuration">
-                    <field name="edi_purchase_conf_ids"
-                        context="{'default_model_name': 'purchase.order', 'default_partner_ids': active_ids}" />
+                    <field
+                        name="edi_purchase_conf_ids"
+                        context="{'default_model_name': 'purchase.order', 'default_partner_ids': active_ids}"
+                    />
                 </group>
             </xpath>
         </field>
