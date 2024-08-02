@@ -8,10 +8,24 @@
       <xpath expr="//field[@name='client_order_ref']" position="after">
         <field name="customer_order_number" />
         <field name="customer_order_free_ref" />
+        <field name="customer_exp_delivery_start" />
+        <field name="customer_exp_delivery_end" />
       </xpath>
       <xpath expr="//field[@name='client_order_ref']" position="attributes">
         <attribute name="readonly">1</attribute>
       </xpath>
     </field>
   </record>
+
+  <record id="view_order_line_tree" model="ir.ui.view">
+        <field name="name">sale.order.line.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="customer_exp_delivery_start" />
+                <field name="customer_exp_delivery_end" />
+            </field>
+        </field>
+    </record>
 </odoo>

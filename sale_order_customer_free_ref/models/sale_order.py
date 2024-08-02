@@ -18,6 +18,12 @@ class SaleOrder(models.Model):
     )
     customer_order_number = fields.Char(string="Customer Order Number", copy=False)
     customer_order_free_ref = fields.Char(string="Customer Free Reference", copy=False)
+    customer_exp_delivery_start = fields.Date(
+        string="Customer Expected Delivery Start Date"
+    )
+    customer_exp_delivery_end = fields.Date(
+        string="Customer Expected Delivery End Date"
+    )
 
     @api.depends("customer_order_number", "customer_order_free_ref")
     def _compute_client_order_ref(self):
