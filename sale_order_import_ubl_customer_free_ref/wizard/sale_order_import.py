@@ -29,6 +29,10 @@ class SaleOrderImport(models.TransientModel):
         res = super()._prepare_order(parsed_order, price_source)
         res["customer_order_number"] = parsed_order.get("order_ref")
         res["customer_order_free_ref"] = parsed_order.get("customer_reference", "")
+        res["customer_exp_delivery_start"] = parsed_order.get(
+            "customer_exp_delivery_start"
+        )
+        res["customer_exp_delivery_end"] = parsed_order.get("customer_exp_delivery_end")
         # Removed because will be computed
         res.pop("client_order_ref")
         return res
@@ -50,4 +54,34 @@ class SaleOrderImport(models.TransientModel):
         if customer_ref_xpath:
             ref = customer_ref_xpath[0].text
             res["customer_reference"] = ref
+        requested_delivery_xpath = xml_root.xpath(
+            "/%s/cac:Delivery/cac:RequestedDeliveryPeriod" % root_name, namespaces=ns
+        )
+        if requested_delivery_xpath:
+            if requested_delivery_xpath[0].xpath("cbc:StartDate", namespaces=ns):
+                res["customer_exp_delivery_start"] = (
+                    requested_delivery_xpath[0]
+                    .xpath("cbc:StartDate", namespaces=ns)[0]
+                    .text
+                )
+            if requested_delivery_xpath[0].xpath("cbc:EndDate", namespaces=ns):
+                res["customer_exp_delivery_end"] = (
+                    requested_delivery_xpath[0]
+                    .xpath("cbc:EndDate", namespaces=ns)[0]
+                    .text
+                )
         return res
+
+    def parse_ubl_sale_order_line(self, line, ns):
+        vals = super().parse_ubl_sale_order_line(line, ns)
+        line_item = line.xpath("cac:LineItem", namespaces=ns)[0]
+        expected_delivery_date = line_item.xpath(
+            "cac:Delivery/cac:RequestedDeliveryPeriod", namespaces=ns
+        )
+        if expected_delivery_date:
+            start_date = expected_delivery_date[0].xpath("cbc:StartDate", namespaces=ns)
+            end_date = expected_delivery_date[0].xpath("cbc:EndDate", namespaces=ns)
+            if start_date and end_date:
+                vals["customer_exp_delivery_start"] = start_date[0].text
+                vals["customer_exp_delivery_end"] = end_date[0].text
+        return vals

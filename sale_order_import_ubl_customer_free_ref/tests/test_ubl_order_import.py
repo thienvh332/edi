@@ -25,6 +25,18 @@ class TestUblOrderImport(SingleTransactionCase):
                 ),
                 "invoicing_partner": self.env.ref("sale_order_import_ubl.karlsson"),
                 "currency": self.env.ref("base.SEK"),
+                "customer_exp_delivery_start": "2010-02-10",
+                "customer_exp_delivery_end": "2010-02-25",
+                "order_line": {
+                    0: {
+                        "customer_exp_delivery_start": "2010-02-10",
+                        "customer_exp_delivery_end": "2010-02-25",
+                    },
+                    1: {
+                        "customer_exp_delivery_start": "2010-02-10",
+                        "customer_exp_delivery_end": "2010-02-25",
+                    },
+                },
             },
             "UBL-Order-2.0-Example.xml": {
                 "client_order_ref": "AEG012345",
@@ -32,6 +44,8 @@ class TestUblOrderImport(SingleTransactionCase):
                 "partner": self.env.ref("sale_order_import_ubl.fred_churchill"),
                 "shipping_partner": self.env.ref("sale_order_import_ubl.iyt"),
                 "currency": self.env.ref("base.GBP"),
+                "customer_exp_delivery_start": "2005-06-29",
+                "customer_exp_delivery_end": "2005-06-29",
             },
         }
         for filename, res in tests.items():
@@ -62,3 +76,34 @@ class TestUblOrderImport(SingleTransactionCase):
                 self.assertEqual(date_order[:10], res["date_order"])
             if res.get("shipping_partner"):
                 self.assertEqual(so.partner_shipping_id, res["shipping_partner"])
+            if res.get("customer_exp_delivery_start"):
+                customer_exp_delivery_start = so.customer_exp_delivery_start.strftime(
+                    "%Y-%m-%d"
+                )
+                self.assertEqual(
+                    customer_exp_delivery_start, res["customer_exp_delivery_start"]
+                )
+            if res.get("customer_exp_delivery_end"):
+                customer_exp_delivery_end = so.customer_exp_delivery_end.strftime(
+                    "%Y-%m-%d"
+                )
+                self.assertEqual(
+                    customer_exp_delivery_end, res["customer_exp_delivery_end"]
+                )
+            if res.get("order_line"):
+                for key, val in res["order_line"].items():
+                    if val.get("customer_exp_delivery_start"):
+                        customer_exp_delivery_start = so.order_line[
+                            key
+                        ].customer_exp_delivery_start.strftime("%Y-%m-%d")
+                        self.assertEqual(
+                            customer_exp_delivery_start,
+                            val["customer_exp_delivery_start"],
+                        )
+                    if val.get("customer_exp_delivery_end"):
+                        customer_exp_delivery_end = so.order_line[
+                            key
+                        ].customer_exp_delivery_end.strftime("%Y-%m-%d")
+                        self.assertEqual(
+                            customer_exp_delivery_end, val["customer_exp_delivery_end"]
+                        )
