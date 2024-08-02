@@ -4,3 +4,5 @@ responses
 # Python Dependencies
 PyYAML
 xmlunittest
+
+odoo14-addon-sale_order_customer_free_ref @ git+https://github.com/thienvh332/edi@refs/pull/26/head#subdirectory=setup/sale_order_customer_free_ref
