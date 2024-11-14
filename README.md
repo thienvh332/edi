@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_einvoice_generate](account_einvoice_generate/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Technical module to generate PDF invoices with embedded XML file
-[account_invoice_download](account_invoice_download/) | 14.0.1.0.2 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Auto-download supplier invoices and import them
+[account_invoice_download](account_invoice_download/) | 14.0.1.1.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Auto-download supplier invoices and import them
 [account_invoice_download_ovh](account_invoice_download_ovh/) | 14.0.1.1.1 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Get OVH Invoice via the API
 [account_invoice_download_scaleway](account_invoice_download_scaleway/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Get Scaleway Invoices via the API
 [account_invoice_export](account_invoice_export/) | 14.0.1.2.5 |  | Account Invoice Export
@@ -32,7 +32,7 @@ addon | version | maintainers | summary
 [account_invoice_import](account_invoice_import/) | 14.0.3.4.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Import supplier invoices/refunds as PDF or XML files
 [account_invoice_import_facturx](account_invoice_import_facturx/) | 14.0.1.0.1 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Import Factur-X/ZUGFeRD supplier invoices/refunds
 [account_invoice_import_invoice2data](account_invoice_import_invoice2data/) | 14.0.2.4.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) [![bosd](https://github.com/bosd.png?size=30px)](https://github.com/bosd) | Import supplier invoices using the invoice2data lib
-[account_invoice_import_simple_pdf](account_invoice_import_simple_pdf/) | 14.0.4.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Import simple PDF vendor bills
+[account_invoice_import_simple_pdf](account_invoice_import_simple_pdf/) | 14.0.4.1.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Import simple PDF vendor bills
 [account_invoice_import_ubl](account_invoice_import_ubl/) | 14.0.1.0.1 |  | Import UBL XML supplier invoices/refunds
 [account_invoice_ubl](account_invoice_ubl/) | 14.0.1.0.3 |  | Generate UBL XML file for customer invoices/refunds
 [account_invoice_ubl_email_attachment](account_invoice_ubl_email_attachment/) | 14.0.1.0.0 |  | Automatically adds the UBL file to the email.
@@ -54,6 +54,7 @@ addon | version | maintainers | summary
 [edi_party_data_oca](edi_party_data_oca/) | 14.0.1.1.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Allow to configure and retrieve party information for EDI exchanges.
 [edi_pdf2data_oca](edi_pdf2data_oca/) | 14.0.1.0.1 | [![etobella](https://github.com/etobella.png?size=30px)](https://github.com/etobella) | Module that allows to import data from a pdf
 [edi_purchase_oca](edi_purchase_oca/) | 14.0.1.0.0 |  | Define EDI Configuration for Purchase Orders
+[edi_sale_oca](edi_sale_oca/) | 14.0.1.0.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Configuration and special behaviors for EDI on sales.
 [edi_sale_order_import](edi_sale_order_import/) | 14.0.1.1.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Plug sale_order_import into EDI machinery.
 [edi_sale_order_import_ubl](edi_sale_order_import_ubl/) | 14.0.1.0.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Plug sale_order_import_ubl into EDI machinery.
 [edi_sale_order_import_ubl_endpoint](edi_sale_order_import_ubl_endpoint/) | 14.0.1.1.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Provide a default endpoint to import SO in UBL format.
@@ -64,7 +65,7 @@ addon | version | maintainers | summary
 [edi_webservice_oca](edi_webservice_oca/) | 14.0.1.4.1 | [![etobella](https://github.com/etobella.png?size=30px)](https://github.com/etobella) [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Defines webservice integration from EDI Exchange records
 [edi_xml_oca](edi_xml_oca/) | 14.0.1.1.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Base module for EDI exchange using XML files.
 [partner_identification_import](partner_identification_import/) | 14.0.1.0.1 |  | Provides partner matching on extra ID
-[pdf_helper](pdf_helper/) | 14.0.2.0.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Provides helpers to work w/ PDFs
+[pdf_helper](pdf_helper/) | 14.0.2.0.1 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Provides helpers to work w/ PDFs
 [product_import](product_import/) | 14.0.1.2.0 |  | Import product catalogues
 [product_import_ubl](product_import_ubl/) | 14.0.1.1.1 |  | Import UBL XML catalogue files
 [purchase_order_ubl](purchase_order_ubl/) | 14.0.1.2.0 |  | Embed UBL XML file inside the PDF purchase order

@@ -41,6 +41,7 @@ setuptools.setup(
         'odoo14-addon-edi_party_data_oca',
         'odoo14-addon-edi_pdf2data_oca',
         'odoo14-addon-edi_purchase_oca',
+        'odoo14-addon-edi_sale_oca',
         'odoo14-addon-edi_sale_order_import',
         'odoo14-addon-edi_sale_order_import_ubl',
         'odoo14-addon-edi_sale_order_import_ubl_endpoint',
