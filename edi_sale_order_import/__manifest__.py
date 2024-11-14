@@ -8,7 +8,7 @@
     MODULE DEPRECATED: use `edi_sale_oca`.
 
     Plug sale_order_import into EDI machinery.""",
-    "version": "14.0.1.1.0",
+    "version": "14.0.2.0.0",
     "development_status": "Alpha",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/edi",
