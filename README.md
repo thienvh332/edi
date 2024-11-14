@@ -54,6 +54,7 @@ addon | version | maintainers | summary
 [edi_party_data_oca](edi_party_data_oca/) | 14.0.1.1.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Allow to configure and retrieve party information for EDI exchanges.
 [edi_pdf2data_oca](edi_pdf2data_oca/) | 14.0.1.0.1 | [![etobella](https://github.com/etobella.png?size=30px)](https://github.com/etobella) | Module that allows to import data from a pdf
 [edi_purchase_oca](edi_purchase_oca/) | 14.0.1.0.0 |  | Define EDI Configuration for Purchase Orders
+[edi_sale_oca](edi_sale_oca/) | 14.0.1.0.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Configuration and special behaviors for EDI on sales.
 [edi_sale_order_import](edi_sale_order_import/) | 14.0.1.1.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Plug sale_order_import into EDI machinery.
 [edi_sale_order_import_ubl](edi_sale_order_import_ubl/) | 14.0.1.0.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Plug sale_order_import_ubl into EDI machinery.
 [edi_sale_order_import_ubl_endpoint](edi_sale_order_import_ubl_endpoint/) | 14.0.1.1.0 | [![simahawk](https://github.com/simahawk.png?size=30px)](https://github.com/simahawk) | Provide a default endpoint to import SO in UBL format.
