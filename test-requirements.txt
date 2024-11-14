@@ -6,3 +6,8 @@ PyYAML
 xmlunittest
 # tests use python 3.6 and pypdf dropped support for python 3.6-3.7 in 5.0
 pypdf==4.3.1
+
+# [14.0][IMP] edi_oca: Add new model edi.configuration #1035
+odoo14-addon-edi_oca @ git+https://github.com/OCA/edi@refs/pull/1035/head#subdirectory=setup/edi_oca
+# [14.0] edi_sale_oca: use edi.configuration #1067
+odoo14-addon-edi_sale_oca @ git+https://github.com/OCA/edi@refs/pull/1067/head#subdirectory=setup/edi_sale_oca
