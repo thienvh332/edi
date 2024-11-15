@@ -5,7 +5,6 @@
         <field
             name="description"
         >Show case how you can send out an order response automatically</field>
-        <field name="code">demo_ubl_edi_sale_ordrsp</field>
         <field name="type_id" ref="demo_edi_exc_type_order_response_out" />
         <field name="backend_id" ref="edi_ubl_oca.edi_backend_ubl_demo" />
         <field name="model_id" ref="sale.model_sale_order" />
