@@ -57,7 +57,7 @@ class EDIBackendTestJobsCase(EDIBackendCommonTestCase, JobMixin):
             self.assertEqual(record.edi_exchange_state, "output_sent")
         self.assertEqual(created[0].name, "Send exchange file.")
         # Check related jobs
-        record.invalidate_recordset()
+        record.invalidate_cache()
         self.assertEqual(created, self._get_related_jobs(record))
 
     def test_output_fail_retry(self):
@@ -129,5 +129,5 @@ class EDIBackendTestJobsCase(EDIBackendCommonTestCase, JobMixin):
         # Should not create new job
         self.assertEqual(len(new_created), 0)
         # Check related jobs
-        record.invalidate_recordset()
+        record.invalidate_cache()
         self.assertEqual(created, self._get_related_jobs(record))
