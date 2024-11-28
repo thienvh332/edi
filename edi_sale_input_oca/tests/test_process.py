@@ -15,7 +15,7 @@ class TestProcessComponent(SavepointComponentCase, EDIBackendTestMixin):
         super().setUpClass()
         cls._setup_env()
         cls.backend = cls._get_backend()
-        cls.exc_type = cls.env.ref("edi_sale_oca.demo_edi_exc_type_order_in")
+        cls.exc_type = cls.env.ref("edi_sale_input_oca.demo_edi_exc_type_order_in")
         cls.record = cls.backend.create_record(
             cls.exc_type.code, {"edi_exchange_state": "input_received"}
         )
