@@ -2,28 +2,23 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "EDI Sales",
+    "name": "EDI Sales input",
     "summary": """
-        Configuration and special behaviors for EDI on sales.
+        Process incoming sale orders with the EDI framework.
     """,
-    "version": "14.0.2.0.0",
+    "version": "14.0.1.0.0",
     "development_status": "Alpha",
     "license": "AGPL-3",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "maintainers": ["simahawk"],
     "website": "https://github.com/OCA/edi",
     "depends": [
-        "edi_oca",
+        "edi_sale_oca",
         "edi_record_metadata_oca",
-        "sale",
+        "sale_order_import",
     ],
-    "data": [
-        "views/res_partner.xml",
-        "views/sale_order.xml",
-        "views/edi_exchange_record.xml",
-    ],
+    "data": [],
     "demo": [
-        "demo/edi_backend.xml",
         "demo/edi_exchange_type.xml",
     ],
 }
