@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  # Copyright 2025 Trobz,
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+
+<record id="account_invoice_import_form" model="ir.ui.view">
+    <field name="name">account.invoice.import.ubl.form</field>
+    <field name="model">account.invoice.import</field>
+    <field name="inherit_id" ref="account_invoice_import.account_invoice_import_form"/>
+    <field name="arch"  type="xml">
+        <ul name="supported_formats_list" position="inside">
+            <li><b><a href="https://service.unece.org/trade/untdid/d01b/trsd/trsdefi.htm" target="_blank">EDIFACT</a></b> (United Nations Directories for Electronic Data Interchange for Administration, Commerce and Transport</li>
+        </ul>
+    </field>
+</record>
+
+
+</odoo>
