@@ -10,6 +10,7 @@
                         <field name="storage_id" />
                         <field name="input_dir_pending" />
                         <field name="input_dir_remove" />
+                        <field name="input_allow_duplicate_filename" />
                         <field
                             name="input_dir_done"
                             attrs="{'invisible': [('input_dir_remove', '=', True)]}"
