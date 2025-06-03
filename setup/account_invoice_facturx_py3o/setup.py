@@ -5,7 +5,7 @@ setuptools.setup(
     odoo_addon={
         "external_dependencies_override": {
             "python": {
-                "facturx": "factur-x"
+                "facturx": "factur-x<=3.1"
             }
         }
     },
