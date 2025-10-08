@@ -283,3 +283,54 @@ class TestEdifactPurchaseOrder(TransactionComponentCase, EDIBackendTestMixin):
         self.assertEqual(len(self.purchase.picking_ids), 1)
         self.assertEqual(len(self.purchase.picking_ids[0].move_line_ids), 3)
         self.assertEqual(sum_quantity_done, 19.0)
+
+    def test_edifact_purchase_wizard_import_missing_price_unit(self):
+        self.partner_1.edifact_purchase_order_out = False
+        edifact_data = self.purchase.edifact_purchase_generate_data()
+        self.assertTrue(edifact_data)
+        self.assertEqual(isinstance(edifact_data, str), True)
+        self.purchase.button_confirm()
+        edifact_data = edifact_data.replace("UNH++ORDERS", "UNH+1+DESADV")
+        edifact_data = edifact_data.replace(
+            "'UNS+S'",
+            (
+                "'LIN+3++:EN'PIA+1+FURN_667777:SA::91'PIA+1+FURN_667777:BP::92'"
+                "QTY+21:4.0:'QTY+52::'DTM+2:20250110:102'MOA+203:0.0'"
+                "RFF+PL:338'TAX+7+VAT+++:::0'UNS+S'"
+            )
+        )
+        # Add supplier info so missing price falls back to vendor price
+        supplierinfo = self.env["product.supplierinfo"].create({
+            "name": self.partner_1.id,
+            "product_tmpl_id": self.product_3.product_tmpl_id.id,
+            "product_id": self.product_3.id,
+            "price": 55,
+            "min_qty": 0.0,
+            "sequence": 1,
+            "date_start": fields.Date.today(),
+            "date_end": False,
+        })
+        wiz = self.env["purchase.order.import"].create(
+            {
+                "import_type": "edifact",
+                "order_file": base64.b64encode(edifact_data.encode()),
+                "order_filename": "test_edifact.txt",
+            }
+        )
+        self.assertEqual(self.purchase.state, "purchase")
+        # Import file to confirm purchase order
+        wiz.import_order_button()
+        new_order = self.env["purchase.order.line"].search(
+            [
+                ("product_id.default_code", "=", self.product_3.default_code),
+            ]
+        )
+        self.assertEqual(new_order.move_ids.quantity_done, 4)
+        purchase_order_new = new_order.order_id
+        self.assertEqual(len(purchase_order_new.order_line), 1)
+        # Check price unit falls back to supplierinfo price
+        self.assertEqual(new_order.price_unit, 55)
+        sum_quantity_done = sum(
+            self.purchase.order_line.mapped("move_ids.quantity_done")
+        )
+        self.assertEqual(sum_quantity_done, 14.0)
