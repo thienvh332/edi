@@ -441,11 +441,6 @@ class PurchaseOrderImport(models.TransientModel):
                     new_line.name,
                 )
             )
-        chatter.append(
-            _("%(orders)s new order line(s) created: %(label)s").format(
-                orders=len(compare_res["to_add"]), label=", ".join(to_create_label)
-            )
-        )
         # Update quantity_done with product_uom_qty with PO created based on
         # information from Despatch Advice
         if order.state not in ["purchase", "done", "cancel"]:
